@@ -6,13 +6,10 @@ $(function () {
   var appWidth = 54;
   var appHeight = 54;
   var flashvars = {'upload_image': './images/xm_video2.png'};
-  var params = {'wmode':'transparent'};
-  var attributes = {'id': RECORDER_APP_ID, 'name': RECORDER_APP_ID,style:'visibility:hidden;margin-top:30px;position: absolute;z-index: 20;float:left;'};
+  var params = {};
+  var attributes = {'id': RECORDER_APP_ID, 'name': RECORDER_APP_ID,style:'margin-top:-6000px;float:left;'};
   swfobject.embedSWF("./swf/recorder.swf", "flashcontent", appWidth, appHeight, "11.0.0", "", flashvars, params, attributes);
-  var ll = $('body').find('#flashcontent').length;
-  if(ll<1){
-	  $("#checkflash").show();
-  }
+
   window.fwr_event_handler = function fwr_event_handler() {
     var name, $controls;
     switch (arguments[0]) {
@@ -55,7 +52,7 @@ $(function () {
         name = arguments[1];
         console.info('saving started', name);
         $("#timer").html("提交中...");
-        $("#recorderApp").css("visibility","hidden");
+        $("#recorderApp").attr("style","margin-top: -6000px;float: left;");
         break;
 
       case "saved":
@@ -65,7 +62,7 @@ $(function () {
 
 		$("#timer").html("提交完成");
 
-		$("#recorderApp").css("visibility","hidden");
+		$("#recorderApp").attr("style","margin-top: -6000px;float: left;");
 
         break;
 

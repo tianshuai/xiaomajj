@@ -207,6 +207,7 @@ textarea{resize:none}
   opacity: 0.8;
   filter: alpha(opacity=80);
   display:block;
+  z-index:90000;
 }
 
 .modal-backdrop,.modal{display: none;}
@@ -215,7 +216,7 @@ textarea{resize:none}
   position: fixed;
   top: 10%;
   left: 50%;
-  z-index: 1050;
+  z-index: 90001;
  width:620px;
   margin-left: -310px;
   *border: 1px solid #999;

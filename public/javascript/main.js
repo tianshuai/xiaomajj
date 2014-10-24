@@ -209,7 +209,7 @@ $(function(){
 				$("#rerecord").css("display","block");
 				$("#start_rec").css('background-image','url(images/xm_video_grayquan.png)');
 				$("#start_rec img").attr('src','images/xm_video_but3.png');
-				
+				$("#recorderApp").attr("style","margin-top:30px;float: left;");
 			//state==2 当前已录音完成，可回放
 			}else if(rec_state==2){
 				FWRecorder.playBack('audio');
@@ -226,7 +226,7 @@ $(function(){
 				//开始录音，检测麦克风
 				if(FWRecorder.isMicrophoneAccessible()){
 					$("#checkflash").hide();
-					$("#recorderApp").css("visibility","hidden");
+					$("#recorderApp").attr("style","margin-top: -6000px;float: left;");
 					$("#start_rec").css('background-image','url(images/xm_video_grayquan.png)');
 					$("#start_rec img").attr('src','images/xm_video_but2.png');
 					rec_state=1;
@@ -234,9 +234,9 @@ $(function(){
 					record_length=0;
 					recordtime();
 					
-					$("#recorderApp").css("visibility","visible");
+					
 				}else{
-					$("#recorderApp").css("visibility","visible");
+					$("#recorderApp").attr("style","margin-top:30px;float: left;");
 					$("#checkflash").show();
 				}
 			}
@@ -258,7 +258,7 @@ $(function(){
 		$("#rerecord").css("display","none");
 		FWRecorder.stopRecording('audio');
 		clearTimeout(timer);
-		$("#recorderApp").css("visibility","hidden");
+		$("#recorderApp").attr("style","margin-top: -6000px;float: left;");
 		rec_state=0;
 	});
 	//--重新录音END--
@@ -271,39 +271,7 @@ $(function(){
 			  return ;
 		}else{
 			
-			if($.browser.msie) {
-				var objStr=$("<object width='620' height='360' id='f4Player' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000'></object>");
-				var paramStr = [
-					'<param name="movie" value="swf/player.swf" />',
-					'<param name="quality" value="high" /> ',
-					'<param name="menu" value="false" /> ',
-					'<param name="allowFullScreen" value="true" />',
-					'<param name="scale" value="noscale" /> ',
-					'<param name="allowScriptAccess" value="always" /> ',
-					'<param name="swLiveConnect" value="true" /> ',
-					'<param name="flashVars" value="skin=swf/mySkin.swf&thumbnail=video-thumbnail.jpg&video='+q_video_url+'&autoplay=1"/>'
-				];
-				for(var i=0; i < paramStr.length; i++) {
-					$(objStr).append(paramStr[i]);
-				}
-				$("#player").html(objStr).addClass("fade in");
-			}else{
-				var objStr = $('<object width="620" height="360" data="swf/player.swf" type="application/x-shockwave-flash" id="f4Player"></object>');
-				var paramStr = [
-								'<param name="quality" value="high" /> ',
-								'<param name="menu" value="false" /> ',
-								'<param name="allowFullScreen" value="true" /> ',
-								'<param name="scale" value="noscale" />',
-								'<param name="allowScriptAccess" value="always" />',
-								'<param name="swLiveConnect" value="true" />',
-								'<param name="flashVars" value="skin=swf/mySkin.swf&thumbnail=video-thumbnail.jpg&video='+q_video_url+'&autoplay=1"/>'
-							];
-				for(var i=0; i < paramStr.length; i++) {
-					$(objStr).append(paramStr[i]);
-				}
-				$("#player").html(objStr).addClass("fade in");
-			}
-			
+			$("#player").html(q_video_url).addClass("fade in");
 			$("#boarddiv").addClass("fade in");
 			
 		}
@@ -474,5 +442,4 @@ $(function(){
 			window.open("xmjj_zbdt.html");
 		}
 	});
-	
 })

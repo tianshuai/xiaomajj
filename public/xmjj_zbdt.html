@@ -16,7 +16,7 @@
     </div>
 </div>
 <div class="bzdt_bg">
-<div class="content" style="width:1210px;">
+<div class="content" style="width:1210px;min-height: 720px;">
 	<div id="new_timeline" class="zb_time fl">
 		
     </div>
@@ -37,21 +37,20 @@
 <div class="footer_bg">
 	<div class="content">
     	<ul class="xm_ewm fl">
-        	<li><img src="images/footer_ewm.jpg" /><span>关注小马</span></li>
-            <li><img src="images/footer_ewm.jpg" /><span>关注小马</span></li>
-            <li><img src="images/footer_ewm.jpg" /><span>关注小马</span></li>
+        	<li><img src="images/xmwx1.jpeg" /><span>关注小马</span></li>
+            <li><img src="images/xmtf.png" /><span>关注小马</span></li>
+            <li><img src="images/xmpg.png" /><span>关注小马</span></li>
         </ul>
-    	<div class="footer_phone fl">400-000-0000</div>
+    	<div class="footer_phone fl">400-811-6269</div>
         <div class="clearfix"></div>
         <p class="foot_copyright">Copyright &copy; 2014 小马过河国际教育 All Rights Reserved. 京ICP备13041889</p>
     </div>
 </div>
-<script type="text/javascript" src="javascript/swfobject.js"></script>
-<script type="text/javascript" src="javascript/jquery.min.js"> </script>
+<script type="text/javascript" src="javascript/jquery-1.9.1.js"> </script>
+
 <script type="text/javascript" src="javascript/sound.js"></script>
-<script type="text/javascript" src="javascript/recorder.js"></script>
-<script type="text/javascript" src="javascript/basic.js"></script>
 <script type="text/javascript" src="javascript/main.js"></script>
+
 <script type="text/javascript">
 	function getDate(date){
 		var rs;
@@ -125,8 +124,13 @@
 					email=getCookie("user_email");
 					$("#information").hide();
 					madeplayer(video_url,email,username);
+		      	},
+		      	error:function(){
+		      		window.location.href = 'xmjj.html';
 		      	}
 			});
+        }else{
+        	window.location.href = 'xmjj.html';
         }
 		$("#init").click(function(){
 			var user_email =$("#email").val().trim();
@@ -166,6 +170,26 @@
 		$("#player").removeAttr("style");
 		$("#player").append(frame);
 	}
+</script>
+<script type="text/javascript" src="javascript/swfobject.js"></script>
+<script type="text/javascript" src="javascript/recorder.js"></script>
+<script type="text/javascript" src="javascript/basic.js"></script>
+<!-- Gooloe 统计 -->
+<script type="text/javascript">
+var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-18258123-1']);
+    _gaq.push(['_setDomainName', '.xiaoma.com']);
+    _gaq.push(['_setAllowHash', false]);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_addOrganic', 'soso', 'w']);
+    _gaq.push(['_addOrganic', 'yodao', 'q']);
+    _gaq.push(['_addOrganic', 'sogou', 'query']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
 </script>
 </body>
 </html>

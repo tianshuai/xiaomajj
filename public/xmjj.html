@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
-	<title>小马机经</title>
+	<title>小马机经-机经预测</title>
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	
 </head>
@@ -112,11 +112,11 @@
 <div class="footer_bg">
 	<div class="content">
     	<ul class="xm_ewm fl">
-        	<li><img src="images/footer_ewm.jpg" /><span>关注小马</span></li>
-            <li><img src="images/footer_ewm.jpg" /><span>关注小马</span></li>
-            <li><img src="images/footer_ewm.jpg" /><span>关注小马</span></li>
+        	<li><img src="images/xmwx1.jpeg" /><span>关注小马</span></li>
+            <li><img src="images/xmtf.png" /><span>关注小马</span></li>
+            <li><img src="images/xmpg.png" /><span>关注小马</span></li>
         </ul>
-    	<div class="footer_phone fl">400-000-0000</div>
+    	<div class="footer_phone fl">400-811-6269</div>
         <div class="clearfix"></div>
         <p class="foot_copyright">Copyright &copy; 2014 小马过河国际教育 All Rights Reserved. 京ICP备13041889</p>
     </div>
@@ -138,11 +138,9 @@
 <div id="audioPlayer" style="visibility:hidden"></div>
 <!-- 声音播放END -->
 
-<script type="text/javascript" src="javascript/swfobject.js"></script>
-<script type="text/javascript" src="javascript/jquery.min.js"> </script>
+<script type="text/javascript" src="javascript/jquery-1.9.1.js"> </script>
+
 <script type="text/javascript" src="javascript/sound.js"></script>
-<script type="text/javascript" src="javascript/recorder.js"></script>
-<script type="text/javascript" src="javascript/basic.js"></script>
 <script type="text/javascript" src="javascript/main.js"></script>
 <script type="text/javascript" src="javascript/jquery.nicescroll.min.js"></script>
 <script type="text/javascript">
@@ -198,7 +196,7 @@
 		          success : function(result){
 		        	  $("#q_title").html($("#qmonth").html()+data.html());
 						$("#q_content").html(result.question_bank.content);
-						q_video_url = result.question_bank.video_url.video_url.url;
+						q_video_url = result.question_bank.video_url;
 						$(".record_record").remove();
 						$(".discussion ul").remove();
 						buildAnswers(result);
@@ -231,9 +229,31 @@
 		getRecordsTimer();
 		$('#q_list').niceScroll({cursorborder:"",cursorcolor:"rgb(243, 118, 58)",boxzoom:false});
 		
-		
+		if(typeof(q_video_url)=="undifend"||q_video_url==null||q_video_url==""){
+			$("#playerbtn").hide();
+		}
 		
 	});
+</script>
+<script type="text/javascript" src="javascript/swfobject.js"></script>
+<script type="text/javascript" src="javascript/recorder.js"></script>
+<script type="text/javascript" src="javascript/basic.js"></script>
+<!-- Gooloe 统计 -->
+<script type="text/javascript">
+var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-18258123-1']);
+    _gaq.push(['_setDomainName', '.xiaoma.com']);
+    _gaq.push(['_setAllowHash', false]);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_addOrganic', 'soso', 'w']);
+    _gaq.push(['_addOrganic', 'yodao', 'q']);
+    _gaq.push(['_addOrganic', 'sogou', 'query']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
 </script>
 </body>
 </html>
