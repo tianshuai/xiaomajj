@@ -4,27 +4,36 @@ namespace :import do
   task :question_bank => :environment do
 
     sp = '’'
-str = 'S_341;;Do you prefer to watch a movie at home or at a movie theater?;;@@
-S_342;;What type of books do you enjoy to read? Romance books, biography books or mystery books? Explain why you enjoy reading this type of book? Please include reasons and details in you explanation.;;@@
-S_343;;Agree or disagree: Students should be required to wear school uniforms to school.;;@@
-S_344;;Some people prefer to make decisions quickly. Others prefer to take their time making them. Which do you prefer and why? Use specific reasons and examples to support your response.;;@@
-S_345;;Choose one of the following natural environment and explain why you would like to live there most: mountain，forest，desert，prairie, seashore or somewhere else? Use specific reasons and examples to support your answer.;;@@
-S_346;;Some people prefer to read imaginative literature like fictions in their spare time，while others prefer to read real literature or nonfictions，such as historical books and biographies. Which kind of books do you prefer，and why? Use reasons and details in your explanation.;;@@
-S_347;;Describe a piece of news that excited you.Why did it excite you?Please include specific reasons and details in your answer.;;@@
-S_348;;Some people believe that first-year college students should live in a dorm building that homes only freshmen. Others may prefer the idea that first-year students must live together with students in 2nd, 3rd, or even 4th grade. Which opinion do you agree with? Explain why.;;@@
-S_349;;Describe one difference between your current life and your life ten years later. Include reasons and details to support your response.;;@@
-S_350;;Would you go to study in a university of a foreign country?;;@@
-S_351;;Do you agree or disagree with the following statement? While choosing friends, people should always choose those who have different interests from their own. Include specific reasons and examples in your explanation.;;@@
-S_352;;What suggestion would you like to give to a child who is starting school for the first time. Use reasons and specific examples to explain why this suggestion is important.;;@@
-S_353;;Some people prefer to live in places where climate doesn’t change very much, while others prefer to live in places where climate changes with seasons. Which one do you prefer? Include reasons and details in your explanation.;;@@
-S_354;;Talk about a time when someone (your friends, family or teachers) gave you advice to solve the problem.;;@@
-S_355;;Some people think that government should put money on arts and culture like museums and theaters. Others don’t think so. What is your opinion? Use specific reasons and examples to support your choice.;;@@
-S_356;;What type of music do you enjoy most? Explain why you enjoy this type of music. Include reasons and details in you explanation.;;@@
-S_357;;Do you agree or disagree with the following statement? It’s easier to teach children in primary schools than students in universities. Include reasons and details in your explanation.;;@@
-S_358;;While choosing a house or an apartment to live in, what is the most important characteristic you care about? Why?;;@@
-S_359;;Some people prefer to watch films or concerts with a group of friends. Others prefer to watch films or concerts alone. Which do you prefer and why? Use specific reasons and examples to support your response.;;@@
-S_360;;Describe how your family and friends used to help you.Please give your answer with specific details.;;@@
-S_361;;Some people enjoy taking risk and trying new things, others are not adventurous,they are cautious and prefer to avoid danger. Which behavior do you think is better? Explain why.;;'
+str = 'S_401;;What is the most important quality the teacher should have? ;;@@
+S_402;; Would you like to make friends with the same interests or the one with different interests? ;;@@
+S_403;; Choose ONE of the forms of the technology in the list and tell why it has great impact on people’s lives in your country? Airplane, computer or television. Use specific reasons and examples to support your response.;;@@
+S_404;;Do you agree or disagree with the following statement? Yong people today know more about world events than their parents did before.;;@@
+S_405;; Your university is planning to allow students to watch TV in theirs dormitories. What is your opinion? What are the advantages and disadvantages of watching TV in dormitories? Include reasons and examples to support your response.;;@@
+S_406;; Some people believe that it is better for small children to grow up in a small town. Others, however, believe that it’s better for them to grow up in a big city. Which do you think is better?;;@@
+S_407;;Which of the following do you think is the most important for maintaining good health? Doing exercises, eating healthy food, or going to bed early?;;@@
+S_408;;Which do you prefer? A job in a distant city with a high salary, or a job in your current city with a low salary.;;@@
+S_409;;Nowadays robots are widely used in the society. What are the benefits and risks of this?;;@@
+S_410;;Should employees be required to wear suits in the workplace, or should they wear casual clothes?;;@@
+S_411;;Your friend often feels nervous when speaking in front of a large group of people. What suggestions would you give to your friend to overcome this fear?;;@@
+S_412;;When you take a trip, do you prefer to just look around, or do you prefer to take pictures and keep a journal?;;@@
+S_413;; Talk about two singers who are popular in your country. Explain why they are popular and how they are different.;;@@
+S_414;;Do you prefer to have fast food in a fast-food restaurant, or do you prefer to have food in other kinds of places?;;@@
+S_415;; Describe?how?cellphones?change?people’s?lives.Please?give?your?answer?with?specific?examples?and?details;;@@
+S_416;;Some?people?prefer?to?go?to?the?same?place?for?a?vacation.Others?prefer?to?go?to?different?places?and?spend?less?time?at?each?place.Which?do?you?prefer?;;@@
+S_417;;What do you think is the most significant benefitthat internet brings to our life? Explain why you think this benefit isimportant. Please include reasons and details to support your response.;;@@
+S_418;;Do you agree or disagree with the followingstatement: people live healthier lives now than they did 100 years ago? Pleaseuse specific reasons and examples to support your answer.;;@@
+S_419;;Talk about an important decision that you have made.Explain why this decision was important for you in details。;;@@
+S_420;; Do you agree or disagree with the statement that it’s important for students to study Art and Music in school.Explain your answer in details.;;@@
+S_421;;Describe a person you want to learn more about, explain why you want to know more about this person in details.;;@@
+S_422;; Do you agree or disagree with the statement that all children under the age of 16 should attend school. Explain you answer in details.;;@@
+S_423;;Describe a person you would like to learn more about and explain why. Please include specific reasons and examples to explain your answer.;;@@
+S_424;;Do you agree with the statement that: Artists and musicians are important to the society.;;@@
+S_425;;What characteristic is the most important for a student to be succeed, Highly motivated, hard working or intelegent;;@@
+S_426;;While traveling, some people prefer to go to new places, others prefer to visit familiar places. Which do you think is better? Explain why. ;;@@
+S_427;;Talk about an activity you enjoyed doing with your family when you were a child, explain you answer in details.;;@@
+S_428;;Do you agree or disagree it is better to be a member of a team than to be a leader of a team.;;@@
+S_429;;Describe a good study habit that is different from other students.;;@@
+S_430;;Large grocery department store or small special store, which one do you prefer.;;'
 
     arr = str.split('@@')
     arr.each do |n|
@@ -35,9 +44,9 @@ S_361;;Some people enjoy taking risk and trying new things, others are not adven
       else
         content = ''
       end
-      q = QuestionBank.new(number: m[0].strip, content: content, video_url: "V_#{m[0].strip}.mp4")
-      #if q.save
-      if q.valid?
+      q = QuestionBank.new(number: m[0].strip, content: content, video_url: "")
+      if q.save
+      #if q.valid?
         puts "question save success!#{m[0].to_s}"
         if m[2].present?
           tip = m[2].strip
@@ -45,8 +54,8 @@ S_361;;Some people enjoy taking risk and trying new things, others are not adven
           tip = ''
         end
         a = Answer.new(tip: tip, question_bank_id: q.id, audio_url: "A_#{m[0].strip}.mp3")
-        #if a.save
-        if a.valid?
+        if a.save
+        #if a.valid?
           puts "answer is success!.....#{m[0].strip}"
         end
       else
