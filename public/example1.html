@@ -1,0 +1,153 @@
+<html>
+<head>
+  
+<meta name="author" content="Sajith Amma" />
+  
+<script type="text/javascript" src="javascript/jquery.min.js"> </script>
+<script type="text/javascript" src="javascript/sound.js"></script>
+<script type="text/javascript" src="javascript/swfobject.js"></script>
+<script type="text/javascript" src="javascript/recorder.js"></script>
+<script type="text/javascript" src="javascript/basic.js"></script>
+<link type="text/css" rel="stylesheet" href="basic.css">
+
+<title>jRecorder Example</title>  
+
+<style>
+
+li {display:inline; margin-right:10px;}
+
+  /* Styles for recorder buttons */
+        .recorder button, .recorder .upload, .level {
+            border: 1px solid #686868;
+            height: 30px;
+            background-color: white;
+            display: inline-block;
+            vertical-align: bottom;
+            margin: 2px;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+        /* Styles for level indicator - required! */
+        .level {
+            width: 30px;
+            height: 30px;
+            position: relative;
+        }
+        .progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #b10000;
+        }
+        .upload {
+            padding-top: 2px;
+        }
+</style>
+
+ 
+</head>
+
+
+<body> 
+<div class="container">
+    <h1><span class="basic">Basic demo of</span><span class="project-name">FlashWavRecorder</span></h1>
+    <section class="recorder-container">
+
+        <!-- Recorder control buttons -->
+        <div class="recorder">
+            <button class="start-recording" onclick="FWRecorder.record('audio', '15audio.wav');">
+                <img src="./images/record.png" alt="Record">
+            </button>
+            <div class="level">
+                <div class="progress"></div>
+            </div>
+            <button class="stop-recording" onclick="FWRecorder.stopRecording('audio');">
+                <img src="./images/stop.png" alt="Stop Recording"/>
+            </button>
+            <button class="start-playing" onclick="FWRecorder.playBack('audio');" title="Play">
+                <img src="./images/play.png" alt="Play"/>
+            </button>
+            
+            <div class="upload" style="display: inline-block">
+                <div id="flashcontent">
+                    <p>Your browser must have JavaScript enabled and the Adobe Flash Player installed.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hidden form for easy specifying the upload request parameters -->
+        <form id="uploadForm" name="uploadForm" method="post" action="http://192.168.1.115:4000/api/v1/records" enctype="mutltipart/form-data">
+            <input name="user_id" value="1" type="hidden"/>
+            <input name="question_id" value="5" type="hidden"/>
+            <input name="audio_length" value="10" type="hidden"/>
+           	
+        </form>
+    </section>
+</div>
+
+
+<br /><br /><br /><br /><br /><br /><br />
+
+		<input type="button" value="²¥·Å" onclick="play();"; />
+		<input type="button" value="Í£Ö¹" onclick="stop();"; /><br />
+		<div id="myContent">
+		
+		</div>
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+<div id="player">
+		<object width="620" height="360" id="f4Player" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"> 
+		<param name="movie" value="swf/player.swf" /> 
+		<param name="quality" value="high" /> 
+		<param name="menu" value="false" /> 
+		<param name="allowFullScreen" value="true" /> 
+		<param name="scale" value="noscale" /> 
+		<param name="allowScriptAccess" value="always" />
+		<param name="swLiveConnect" value="true" />
+		<param name="flashVars" value="skin=swf/mySkin.swf
+			&thumbnail=video-thumbnail.jpg
+			&video=../111.mp4
+			"/>
+		<!-- [if !IE] -->
+		<object width="620" height="360" data="swf/player.swf" type="application/x-shockwave-flash" id="f4Player">
+		<param name="quality" value="high" /> 
+		<param name="menu" value="false" /> 
+		<param name="allowFullScreen" value="true" /> 
+		<param name="scale" value="noscale" />
+		<param name="allowScriptAccess" value="always" />
+		<param name="swLiveConnect" value="true" />
+		<param name="flashVars" value="skin=swf/mySkin.swf
+			&thumbnail=video-thumbnail.jpg
+			&video=../111.mp4
+			"/>
+		</object> 
+		 <!-- [endif] --> 
+		</object>
+	</div>
+</body>
+</html>
+
+
+ <script type="text/javascript">
+		window.onload = function()
+		{
+			swfobject.embedSWF("swf/soundPlay.swf", "myContent", "280", "74", "10.0.0", "swf/expressInstall.swf");
+		}
+		
+		function play()
+		{
+			var swf = swfobject.getObjectById("myContent"); 
+			swf.playSound('http://pigai.oss-cn-hangzhou.aliyuncs.com/uploads/audio.wav');
+		}
+		function stop()
+		{
+			var swf = swfobject.getObjectById("myContent"); 
+			swf.stopSound();
+		}
+
+                  
+
+           
+        </script>

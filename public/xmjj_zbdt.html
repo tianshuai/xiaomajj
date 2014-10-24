@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+	<title>小马机经-直播点击</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+
+<!--直播点击-->
+<div class="bzdt_tit">
+	<div class="content" style="width:1210px;">
+    	<div class="zbdt_tit zbdt_tit1 fl">即将开始</div>
+        <div class="zbdt_tit zbdt_tit2 fl">往期直播课</div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="bzdt_bg">
+<div class="content" style="width:1210px;">
+	<div id="new_timeline" class="zb_time fl">
+		
+    </div>
+    <div id="old_timeline" class="zb_time fl" style="display:none">
+		
+    </div>
+    <div id="player" class="clearfix" style="width: 400px;height: 300px;margin: auto;padding-top: 120px;">
+        <div style="border: solid 1px gray;border-radius: 5px;" id="information">
+        	<span style="display: block;height: 30px;font-size: 18px;background-color: rgb(17, 92, 145);color: white;text-align: center;">登录</span>
+        	<div style="height: 30px;font-size: 15px;padding-left: 30px;margin: 30px;">邮箱:&nbsp;&nbsp;<input type="text" name='email' id="email" class="zc_text" /></div>
+        	<div style="height: 30px;font-size: 15px;padding-left: 30px;margin: 30px;">密码:&nbsp;&nbsp;<input type="password" name="pwd" id="pwd" class="zc_text" /></div>
+        	<div style="height: 50px;padding-left: 147px;"><input type="button" id="init" value="进入直播" class="us_sub1" /></div>
+			<span id="msg" style="color:red;font-size:12px;"></span>
+        </div>
+    </div>
+</div>
+</div>
+<div class="footer_bg">
+	<div class="content">
+    	<ul class="xm_ewm fl">
+        	<li><img src="images/footer_ewm.jpg" /><span>关注小马</span></li>
+            <li><img src="images/footer_ewm.jpg" /><span>关注小马</span></li>
+            <li><img src="images/footer_ewm.jpg" /><span>关注小马</span></li>
+        </ul>
+    	<div class="footer_phone fl">400-000-0000</div>
+        <div class="clearfix"></div>
+        <p class="foot_copyright">Copyright &copy; 2014 小马过河国际教育 All Rights Reserved. 京ICP备13041889</p>
+    </div>
+</div>
+<script type="text/javascript" src="javascript/swfobject.js"></script>
+<script type="text/javascript" src="javascript/jquery.min.js"> </script>
+<script type="text/javascript" src="javascript/sound.js"></script>
+<script type="text/javascript" src="javascript/recorder.js"></script>
+<script type="text/javascript" src="javascript/basic.js"></script>
+<script type="text/javascript" src="javascript/main.js"></script>
+<script type="text/javascript">
+	function getDate(date){
+		var rs;
+		rs = date.split('-')[1]+'月'+date.split('-')[2]+'日';
+		return rs;
+	}
+
+	var video_url,email,username;
+    $(function(){
+
+    	$(".zbdt_tit").click(function(){
+    		$(".zbdt_tit1").attr('class','zbdt_tit2 zbdt_tit fl');
+    		$(this).removeClass('zbdt_tit2');
+    		$(this).addClass('zbdt_tit1');
+    		
+    		$("#new_timeline").toggle();
+    		$("#old_timeline").toggle();
+    	});
+
+        $.ajax({
+          type: 'get',
+          url: 'http://test.xiaoma-development.org/v1/live_broadcasts?origin=web',
+          success: function(data){
+          	 var date,time,title,status;
+            for(var i in data.live_broadcasts){
+            	date=getDate(data.live_broadcasts[i].start_at.split('T')[0]);
+            	time=data.live_broadcasts[i].start_at.split('T')[1].split(':')[0]+':'+data.live_broadcasts[i].start_at.split('T')[1].split(':')[1];
+            	title=data.live_broadcasts[i].title;
+            	status=data.live_broadcasts[i].status;
+				
+            	var dl=$("<dl></dl>");
+            	var dt=$("<dt class='fl'>"+date+"</dt>");
+            	var dd=$("<dd class='fl'></dd>");
+            	dd.append($("<label>"+time+"</label>"));
+            	var span=$("<span></span>");
+            	if(status==2){
+            		span.addClass("zbing");
+            		span.html("正在直播...");
+            		video_url = data.live_broadcasts[i].video_url;
+            	}else if(status==1){
+            		span.html("未开始");
+            	}else if(status==3){
+            		span.html("已结束");
+            	}
+
+            	dd.append(span);
+            	var titlediv=$("<div class='zb_js clearfix'>"+title+"</div>");
+
+            	dl.append(dt);
+            	dl.append(dd);
+            	if(status==3){
+					$("#old_timeline").append(dl);
+            		$("#old_timeline").append(titlediv);
+            	}else{
+            		$("#new_timeline").append(dl);
+            		$("#new_timeline").append(titlediv);
+            	}
+
+            }
+            
+          }
+        });
+       
+       	var token = getCookie("token");
+        if(token!=null){
+        	$.ajax({ url: "http://192.168.1.209:4000/api/v1/auth/ping",
+				data:{token:token}, 
+				type:'get',
+				success: function(data){
+					username = getCookie("user_name");
+					email=getCookie("user_email");
+					$("#information").hide();
+					madeplayer(video_url,email,username);
+		      	}
+			});
+        }
+		$("#init").click(function(){
+			var user_email =$("#email").val().trim();
+			var pwd = $("#pwd").val().trim();
+			$("#msg").html("");
+			if(user_email.length==0){
+				$("#msg").html("请填写用户名~");
+				return ;
+			}
+			if(pwd.length==0){
+				$("#msg").html("请填写密码~");
+			}
+			$.ajax({ url: "http://192.168.1.209:4000/api/v1/auth/login",
+				data:{login:user_email,password:pwd}, 
+				type:'post',
+				success: function(data){
+					saveCookie(data.user_id, user_email, data.login, data.token);
+					username=data.login;
+					email = user_email;
+					$("#information").hide();
+					madeplayer(video_url,email,username);
+		      	},
+		      	error:function(data){
+		      		$("#msg").html("失败，确认用户名密码是否正确");
+		      	}
+			});
+			
+		});
+    });
+	function madeplayer(pid,email,uname){
+		var frame=$("<iframe border='0' width='930' height='580'></iframe>");
+		var url='http://webinar.vhall.com/appaction.php?module=inituser';
+		url=url+"&email="+email;
+		url=url+"&name="+uname;
+		url=url+"&pid="+pid;
+		frame.attr('src',url);
+		$("#player").removeAttr("style");
+		$("#player").append(frame);
+	}
+</script>
+</body>
+</html>
