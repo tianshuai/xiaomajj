@@ -127,7 +127,7 @@
 <!-- 视频播放层END -->
 
 <!-- 录音提交表单START -->
-<form id="uploadForm" name="uploadForm" method="post" action="http://192.168.1.209:4000/api/v1/records" enctype="mutltipart/form-data">
+<form id="uploadForm" name="uploadForm" method="post" action="http://xiaomajijing.xiaoma.com209:4000/api/v1/records" enctype="mutltipart/form-data">
     <input name="user_id" id="user_id" type="hidden"/>
     <input name="question_bank_id" id="question_id" type="hidden"/>
     <input name="audio_length" id="audio_length" type="hidden"/>
@@ -149,7 +149,11 @@
 	
 	//--根据时间获取预测列表
 	function getQuestionList(dateTime){
-		$.get("http://192.168.1.209:4000/api/v1/question_lists/yuce_list?year="+dateTime.split('.')[0]+"&month="+dateTime.split('.')[1], function(result){
+		$.ajax({
+	        type : "get", 
+	        url:api_url+"/api/v1/question_lists/yuce_list?year="+dateTime.split('.')[0]+"&month="+dateTime.split('.')[1],
+	        async : false, 
+			success: function(result){
 			
 			if(result.question_lists.length>0){
 				$("#q_list").html('');
@@ -176,7 +180,7 @@
 			}
 			
 
-			
+			}
 		});
 	}
 	 
@@ -191,7 +195,7 @@
 			$("#question_id").val(q_id);
 			$.ajax({ 
 		          type : "get", 
-		          url : "http://192.168.1.209:4000/api/v1/question_banks/"+q_id, 
+		          url : api_url+"/api/v1/question_banks/"+q_id, 
 		          async : false, 
 		          success : function(result){
 		        	  $("#q_title").html($("#qmonth").html()+data.html());

@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-<div class="content">
+<div class="content" style="min-height: 700px;">
 	<div class="zc_logo">
 		<a href="#"><img src="images/zc_logo.jpg" title="小马机经" /></a>
 	</div>
@@ -15,12 +15,12 @@
 			<div class="zcform_left fl">
 				<h2>欢迎加入小马机经</h2>
 				<div class="zcform">
-					<p><span>用户名</span><input type="text" id="username" name="username" class="zc_text" /><span id="username_check" style="color:red;font-size:10px;width:200px;"></span></p>
-					<p><span>邮箱</span><input type="text" id="email" name="email" class="zc_text" /><span id="email_check" style="color:red;font-size:10px;width:200px;"></span></p>
-					<p><span>密码</span><input type="password" id="pwd" name="yourpw" class="zc_text" /><span id="pwd_check" style="color:red;font-size:10px;width:200px;"></span></p>
-					<p><span>确认密码</span><input type="password" id="pwds" name="checkpw" class="zc_text" /><span id="pwds_check" style="color:red;font-size:10px;width:200px;"></span></p>
+					<p><span>用户名</span><input type="text" id="username" name="username" class="zc_text" /><span id="username_check" style="color:red;font-size:10px;width:200px;text-align:left;margin-left: 80px"></span></p>
+					<p><span>邮箱</span><input type="text" id="email" name="email" class="zc_text" /><span id="email_check" style="color:red;font-size:10px;width:200px;text-align:left;margin-left: 80px"></span></p>
+					<p><span>密码</span><input type="password" id="pwd" name="yourpw" class="zc_text" /><span id="pwd_check" style="color:red;font-size:10px;width:200px;text-align:left;margin-left: 80px"></span></p>
+					<p><span>确认密码</span><input type="password" id="pwds" name="checkpw" class="zc_text" /><span id="pwds_check" style="color:red;font-size:10px;width:200px;text-align:left;margin-left: 80px"></span></p>
 					<p><span></span><span id="msg" style="color:red;font-size: 10px;width:300px;"></span></p>
-					<p><span></span><a href="#"><input type="button" name="zc" id="zcbtn" value="注册" class="zc_sub" /></a></p>
+					<p><span></span><a href="#"><input type="button" name="zc" value="注册" class="zc_sub" /></a></p>
 				</div>
 			</div>
 			<div class="zc_right fr">
@@ -48,7 +48,7 @@
         <p class="foot_copyright">Copyright &copy; 2014 小马过河国际教育 All Rights Reserved. 京ICP备13041889</p>
     </div>
 </div>
-<script type="text/javascript" src="javascript/jquery.min.js"> </script>
+<script type="text/javascript" src="javascript/jquery-1.9.1.js"> </script>
 <script type="text/javascript" src="javascript/swfobject.js"></script>
 <script type="text/javascript" src="javascript/recorder.js"></script>
 <script type="text/javascript" src="javascript/basic.js"></script>
@@ -104,7 +104,7 @@
              $(this).triggerHandler("blur");
         });//end blur
 		
-		$("#zcbtn").click(function(){
+		$(".zc_sub").click(function(){
 			var username_check=$("#username_check").html().length;
 			var email_check= $("#email_check").html().length;
 			var pwd_check = $("#pwd_check").html().length;
@@ -118,19 +118,20 @@
 				if(username.length==0 || email.length==0 ||pwd.length==0){
 					return false;
 				}
-				$.ajax({ url: "http://192.168.1.209:4000/api/v1/users",
+				var flag = false;
+				$.ajax({ url: api_url+"/api/v1/users",
 					data:{login:username,email:email,password:pwd}, 
 					type:'post',
 					async:false,
 					success: function(data){
 						$("#msg").html("注册成功！<a href='xmjj.html'>去登录</a>");
-						$.ajax({ url: "http://192.168.1.209:4000/api/v1/auth/login",
+						$.ajax({ url: api_url+"/api/v1/auth/login",
 							data:{login:email,password:pwd}, 
 							type:'post',
 							async:false,
 							success: function(data){
 					        	saveCookie(data.user_id, email, data.login, data.token);
-					        	window.location.href = 'xmjj.html';
+					        	flag = true;
 					      	},
 					      	error:function(data){
 					      		$("#msg").html("失败，确认用户名密码是否正确");
@@ -141,6 +142,9 @@
 			      		$("#msg").html("注册失败，邮箱已被注册过。<a href='xmjj.html'>直接登录</a>");
 			      	}
 				});
+				if(flag){
+					window.location.href = 'xmjj.html';
+				}
 			}
 		});
 	});

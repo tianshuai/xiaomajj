@@ -92,7 +92,7 @@
     		$("#new_timeline").toggle();
     		$("#old_timeline").toggle();
     	});
-    	$.getJSON("http://appbg.xiaoma.com/open_courses.json&format=json&jsoncallback=?",
+    	/* $.getJSON("http://appbg.xiaoma.com/open_courses.json&format=json&jsoncallback=?",
     		function(data){
     			var date,time,title,status;
     			for(var i in data.data){
@@ -130,30 +130,32 @@
                 	}
 
                 }
-    		});
-    	/* $.ajax({
+    		}); */
+    	$.ajax({
     		type: 'get',
-          url: 'http://appbg.xiaoma.com/open_courses.json',
+          url: api_url+'/api/v1/third_api/zhibo',
+          dataType:'json',
           success: function(data){
           	 var date,time,title,status;
-            for(var i in data.live_broadcasts){
-            	date=getDate(data.live_broadcasts[i].start_at.split('T')[0]);
-            	time=data.live_broadcasts[i].start_at.split('T')[1].split(':')[0]+':'+data.live_broadcasts[i].start_at.split('T')[1].split(':')[1];
-            	title=data.live_broadcasts[i].title;
-            	status=data.live_broadcasts[i].status;
+          	data=JSON.parse(data); 
+          	for(var i in data.data){
+            	date=getDate(data.data[i].publish_date.split('T')[0]);
+            	time=data.data[i].publish_date.split('T')[1].split(':')[0]+':'+data.data[i].publish_date.split('T')[1].split(':')[1];
+            	title=codeing(data.data[i].title);
+            	status=data.data[i].pub_status;
 				
             	var dl=$("<dl></dl>");
             	var dt=$("<dt class='fl'>"+date+"</dt>");
             	var dd=$("<dd class='fl'></dd>");
             	dd.append($("<label>"+time+"</label>"));
             	var span=$("<span></span>");
-            	if(status==2){
+            	if(status==3){
             		span.addClass("zbing");
             		span.html("正在直播...");
-            		video_url = data.live_broadcasts[i].video_url;
+            		video_url = getUrlParam(data.data[i].audio_stream,"pid");
             	}else if(status==1){
             		span.html("未开始");
-            	}else if(status==3){
+            	}else if(status==2){
             		span.html("已结束");
             	}
 
@@ -162,7 +164,7 @@
 
             	dl.append(dt);
             	dl.append(dd);
-            	if(status==3){
+            	if(status==2){
 					$("#old_timeline").append(dl);
             		$("#old_timeline").append(titlediv);
             	}else{
@@ -172,12 +174,16 @@
 
             }
             
+          },
+          error: function(data){
+        	  
+        	  console.log("error:"+JSON.stringify(data));
           }
-        }); */
+        });
        
        	var token = getCookie("token");
         if(token!=null){
-        	$.ajax({ url: "http://192.168.1.209:4000/api/v1/auth/ping",
+        	$.ajax({ url: api_url+"/api/v1/auth/ping",
 				data:{token:token}, 
 				type:'get',
 				success: function(data){
@@ -204,7 +210,7 @@
 			if(pwd.length==0){
 				$("#msg").html("请填写密码~");
 			}
-			$.ajax({ url: "http://192.168.1.209:4000/api/v1/auth/login",
+			$.ajax({ url: api_url+"/api/v1/auth/login",
 				data:{login:user_email,password:pwd}, 
 				type:'post',
 				success: function(data){

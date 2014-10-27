@@ -37,10 +37,10 @@ textarea{resize:none}
 .color_green{color:#0f959d;}
 .zhuanghao{font-size:14px;font-family:"宋体";color:#5e3c26;}
 .sidebar{margin-top:32px;}
-.sidebar_a{width:186px;border:2px solid #ef7360;border-top:0;height: 385px;}
+.sidebar_a{width:186px;border:2px solid #ef7360;border-top:0;height: 550px;}
 .sidebar_a h2{position:relative;height:50px;line-height:50px;background:#ef7360;text-align:center;font-size:18px;font-weight:100;color:#fff;}
 .sidebar_a h2 span{display:block;position:absolute;top:0;right:0px;cursor:pointer}
-.sidebar_a ul{padding:6px 10px;height:320px;overflow: hidden;position: absolute;width:167px;}
+.sidebar_a ul{padding:6px 10px;height:550px;overflow: hidden;position: absolute;width:167px;}
 .sidebar_a li{float:left;height:41px;line-height:41px;border-bottom:2px solid #dddddd;padding-left:10px;}
 .sidebar_a li a{display:inline-block;width:34px;height:34px;text-align:center;line-height:34px;margin:4px 18px 0 0;}
 .background_yw{width:34px;height:34px;background-position:0 0;color:#fff;}
@@ -114,6 +114,7 @@ textarea{resize:none}
 .zc_yzmtext{display:inline-block;width:104px;height:28px;border-radius:3px;border:1px solid #c9c9c9;background:#fff;}
 .zc_ty{font-size:14px;color:#232323;font-weight:100;}
 .zc_sub{display:inline-block;width:82px;height:28px;text-align:center;line-height:25px;border-radius:3px;background:#f0f0f0;border:1px solid #b9b9b9;font-size:14px;font-weight:600;color:#999999;cursor:pointer;}
+.zc_sub:hover{background:#6E8FE2;color:#FFFFFF;}
 .zc_right{margin:64px 0 156px 0;font-size:12px;color:#666666;}
 .zc_right a{color:#666699;}
 .copyright{margin:30px 22px 0 0;padding-top:12px;border-top:1px dashed #dcdcdc;clear:both;}

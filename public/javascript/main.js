@@ -3,7 +3,8 @@
  */
 //q_id=题目id,视频链接,用户id,录音状态符,录音计时器,录音时间,录制长度,播放长度,音频播放计时器,音频播放器状态,当前播放的链接
 var q_id,q_video_url,userid,rec_state,timer,tsec,record_length,record_play_length,audioPlayTimer,audioPlayState,currentUrl;
-
+var api_url= 'http://xiaomajijing.xiaoma.com';
+var api_url= 'http://192.168.1.209:4000';
 rec_state=0;
 audioPlayState=0;
 //写cookies
@@ -119,7 +120,7 @@ function getRecordsTimer(){
 	if(typeof(q_id) != "undefined"){
 		$.ajax({ 
 	          type : "get", 
-	          url : "http://192.168.1.209:4000/api/v1/records?question_bank_id="+q_id, 
+	          url : api_url+"/api/v1/records?question_bank_id="+q_id, 
 	          async : false, 
 	          success : function(result){
 	        	  getRecordsById(result);
@@ -159,7 +160,7 @@ function getDiscussionTimer(){
 	if(typeof(q_id) != "undefined"){
 		$.ajax({ 
 	          type : "get", 
-	          url : "http://192.168.1.209:4000/api/v1/Opinions?question_bank_id="+q_id, 
+	          url : api_url+"/api/v1/Opinions?question_bank_id="+q_id, 
 	          async : false, 
 	          success : function(result){
 	        	  getDiscussionById(result);
@@ -289,7 +290,7 @@ $(function(){
 	//判断登录状态
 	var token = getCookie("token");
     if(token!=null){
-    	$.ajax({ url: "http://192.168.1.209:4000/api/v1/auth/ping",
+    	$.ajax({ url: api_url+"/api/v1/auth/ping",
 			data:{token:token}, 
 			type:'get',
 			success: function(data){
@@ -304,7 +305,7 @@ $(function(){
 	
 	//--录音播放START--
 	$('body').on('click','.record_pic a',function(){
-		var audio_url = $(this).attr("audiourl");
+		var audio_url = "http://"+$(this).attr("audiourl");
 		
 		var audio_length=$(this).attr("rlength");
 		if(audio_length.split(":").length>2){
@@ -364,14 +365,14 @@ $(function(){
 		if(typeof(userid)!="undefined" && typeof(q_id)!="undefined"){
 			var contents = $(".multieditbox").val().trim();
 			if(contents.length>0){
-				$.ajax({ url: "http://192.168.1.209:4000/api/v1/Opinions",
+				$.ajax({ url: api_url+"/api/v1/Opinions",
 					data:{content:contents,user_id:userid,question_bank_id:q_id}, 
 					type:'post',
 					success: function(data){
 						$(".multieditbox").val('');
 						$.ajax({ 
 					          type : "get", 
-					          url : "http://192.168.1.209:4000/api/v1/Opinions?question_bank_id="+q_id, 
+					          url : api_url+"/api/v1/Opinions?question_bank_id="+q_id, 
 					          async : false, 
 					          success : function(result){
 					        	  getDiscussionById(result);
@@ -410,7 +411,7 @@ $(function(){
 		if(pwd.length==0){
 			$("#msg").html("请填写密码~");
 		}
-		$.ajax({ url: "http://192.168.1.209:4000/api/v1/auth/login",
+		$.ajax({ url: api_url+"/api/v1/auth/login",
 			data:{login:email,password:pwd}, 
 			type:'post',
 			success: function(data){
