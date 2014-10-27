@@ -13,9 +13,7 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: root
-  password: 
-  socket: /var/run/mysqld/mysqld.sock
+  #socket: /var/run/mysqld/mysqld.sock
 
 development:
   <<: *default
@@ -49,6 +47,7 @@ test:
 #
 production:
   <<: *default
-  database: xiaomajj
+  host: 192.168.1.202
+  database: xiaomajijing
   username: root
-  password: 
+  password: ergal1234
