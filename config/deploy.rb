@@ -9,7 +9,7 @@ set :repo_url, 'git@github.com:tianshuai/xiaomajj.git'
 
 # Default deploy_to directory is /var/www/my_app
 # set :deploy_to, '/var/www/my_app'
-set :deploy_to, '/home/xiaomajijing/xiaomajj2'
+set :deploy_to, '/home/xiaomajijing/xiaomajj3'
 
 # Default value for :scm is :git
 #set :scm, :git
