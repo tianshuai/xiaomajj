@@ -14,13 +14,13 @@ module API
         post do
           user = User.new({
             login: params[:login],
-            email: params[:email],
+            email: params[:email].downcase,
             password: params[:password]
           })
           if user.save
-            { stat: 1, msg: 'success' }
+            { stat: 1, msg: 'success!' }
           else
-            { stat: 0, msg: 'faile' }
+            error!(user.errors, 401)
           end
         end
       end
