@@ -12,11 +12,15 @@ module API
           requires :user_id, type: Integer, desc: "user ID"
         end
         post do
-          Opinion.create!({
-            content: params[:content],
-            question_bank_id: params[:question_bank_id],
-            user_id: params[:user_id]
-          })
+          unless current_user && current_user.id==params[:user_id].to_i
+            Opinion.create!({
+              content: params[:content],
+              question_bank_id: params[:question_bank_id],
+              user_id: params[:user_id]
+            })
+          else
+            {stat: 0, msg: '请先登陆'}
+          end
         end
 
         desc "Get the newest three opinions."

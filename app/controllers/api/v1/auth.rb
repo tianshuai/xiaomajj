@@ -29,11 +29,15 @@ module API
 
       desc "Returns pong if logged in correctly"
       params do
-        requires :token, type: String, desc: "Access token."
+        #requires :token, type: String, desc: "Access token."
       end
       get :ping do
-        authenticate!
-        { message: "ok" }
+        #authenticate!
+        if current_user
+          { stat: 1, msg: 'ok' } 
+        else
+          { stat: 0, msg: 'not login' } 
+        end 
       end
   
       desc 'logout'
@@ -46,7 +50,7 @@ module API
           
           {stat: 1, msg: 'success!'}
         else
-          error!('未登陆状态', 401)
+          {stat: 0, msg: '未登陆状态!'}
         end
       end
 

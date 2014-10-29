@@ -23,6 +23,19 @@ module API
         helpers do  
           def authenticate!
             error!('Unauthorized. Invalid or expired token.', 401) unless current_user
+            
+          end
+
+          def load_user(options={})
+            {user_info: user_info}.merge(options)
+          end
+
+          #用户基本信息
+          def user_info
+            {is_login: 0}
+            if current_user
+              {is_login: 1, id: current_user.id, name: current_user.login, email: current_user.email}
+            end
           end
 
           def current_user=(user)
@@ -31,12 +44,19 @@ module API
 
           def current_user
           # find token. Check if valid.
-            token = ApiKey.where(access_token: params[:token]).first
-            if token && !token.expired?
-              @current_user ||= User.find(token.user_id)
-            else
-              @current_user = nil
+            unless @current_user
+              if cookies[:token].present?
+                token = ApiKey.where(access_token: cookies[:token]).first
+                if token && !token.expired?
+                  @current_user ||= User.find(token.user_id)
+                else
+                  @current_user = nil
+                end
+              else
+                @current_user = nil
+              end
             end
+            @current_user
           end
         end  
 
@@ -51,3 +71,4 @@ module API
     end
   end
 end
+            

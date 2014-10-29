@@ -15,4 +15,15 @@ class User < ActiveRecord::Base
   def authenticate(password)
   	self.password == password
   end
+
+  def self.new_remember_token
+    SecureRandom.urlsafe_base64
+  end
+
+  #加密token
+  def self.encrypt(token)
+    Digest::SHA1.hexdigest(token.to_s)
+  end
+
+
 end
