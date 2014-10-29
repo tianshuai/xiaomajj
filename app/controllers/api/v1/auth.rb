@@ -29,7 +29,7 @@ module API
 
       desc "Returns pong if logged in correctly"
       params do
-        #requires :token, type: String, desc: "Access token."
+        requires :token, type: String, desc: "Access token."
       end
       get :ping do
         #authenticate!
