@@ -45,8 +45,8 @@ module API
           def current_user
           # find token. Check if valid.
             unless @current_user
-              if cookies[:token].present?
-                token = ApiKey.where(access_token: cookies[:token]).first
+              if params[:token].present?
+                token = ApiKey.where(access_token: params[:token]).first
                 if token && !token.expired?
                   @current_user ||= User.find(token.user_id)
                 else

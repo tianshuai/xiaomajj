@@ -21,7 +21,6 @@ module API
         end
         if user.authenticate(params[:password])
           key = ApiKey.create(user_id: user.id)
-          cookies[:token] = key.access_token
           {token: key.access_token, user_id: user.id, login: user.login}
         else
           error!('密码错误!', 401)
