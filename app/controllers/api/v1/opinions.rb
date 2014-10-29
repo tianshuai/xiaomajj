@@ -10,14 +10,18 @@ module API
           requires :content, type: String, desc: "opinion content"
           requires :question_bank_id, type: Integer, desc: "question Bank ID"
           requires :user_id, type: Integer, desc: "user ID"
+          optional :token,  type: String, desc: "token"
         end
         post do
-          Opinion.create!({
-            content: params[:content],
-            question_bank_id: params[:question_bank_id],
-            user_id: params[:user_id]
-          })
-
+          if current_user
+            Opinion.create!({
+              content: params[:content],
+              question_bank_id: params[:question_bank_id],
+              user_id: params[:user_id]
+            })
+          else
+            error!('没有权限!', 401)
+          end
         end
 
         desc "Get the newest three opinions."

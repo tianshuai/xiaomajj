@@ -11,14 +11,19 @@ module API
           requires :audio_length, type: String, desc: "audio length"
           requires :question_bank_id, type: Integer, desc: "question ID"
           requires :user_id, type: Integer, desc: "user ID"
+          optional :token,  type: String, desc: "token"
         end
         post do
-          Record.create!({
-            audio_url: params[:audio_url],
-            audio_length: params[:audio_length],
-            question_bank_id: params[:question_bank_id],
-            user_id: params[:user_id]
-          })
+          if current_user
+            Record.create!({
+              audio_url: params[:audio_url],
+              audio_length: params[:audio_length],
+              question_bank_id: params[:question_bank_id],
+              user_id: params[:user_id]
+            })
+          else
+            error('没有权限!', 401)
+          end
         end
 
         desc "Get the newest three records."
@@ -26,7 +31,7 @@ module API
           requires :question_bank_id, type: Integer, desc: "ID of question"
         end
         get  do
-          QuestionBank.find(params[:question_bank_id]).records.limit(3)
+          QuestionBank.find(params[:question_bank_id]).records.limit(3).order('created_at DESC')
         end
 
         desc "find One Record"
