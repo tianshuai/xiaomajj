@@ -7,10 +7,11 @@ module API
 
         desc "tiku_list."
         params do
-          requires :year, type: Integer, desc: "year"
+          optional :year, type: Integer, default: 0, desc: "year"
         end
         get :tiku_list do
           arr = []
+          params[:year] = Time.now.year if params[:year] == 0
           items = QuestionList.where(year: params[:year], kind: 1)
           items.each do |d|
             hash = {}
@@ -31,11 +32,15 @@ module API
 
         desc "yuce_list."
         params do
-          requires :year, type: Integer, desc: "year"
-          requires :month, type: Integer, desc: "month"
+          optional :year, type: Integer,  default: 0, desc: "year"
+          optional :month, type: Integer, default: 0, desc: "month"
+          optional :day, type: Integer, default: 0, desc: "month"
         end
         get :yuce_list do
           arr = []
+          params[:year] = Time.now.year if params[:year] == 0
+          params[:month] = Time.now.month if params[:month] == 0
+          params[:day] = Time.now.day if params[:day] == 0
           items = QuestionList.where(year: params[:year], month: params[:month], kind: 2)
           items.each do |d|
             hash = {}
