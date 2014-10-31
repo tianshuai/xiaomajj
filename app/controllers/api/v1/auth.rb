@@ -6,25 +6,29 @@ module API
 
       desc "Creates and returns access_token if valid login"
       params do
-         requires :login, type: String, desc: "email"
+         requires :mark, type: String, desc: "user email or phone"
          requires :password, type: String, desc: "Password"
       end
       post :login do
-        if params[:login].include?("@")
-          user = User.find_by(email: params[:login].downcase)
+
+        if (User::VALID_EMAIL_REGEX =~ params[:mark]) == 0
+          user = User.find_by(email: params[:mark].downcase)
+        elsif (User::VALID_PHONE_REGEX =~ params[:mark]) == 0
+          user = User.find_by(phone: params[:mark])
         else
-          user = nil
+          return {stat: 0, msg: '邮箱或手机格式不正确!'}
+        end
+        if user.present?
+          if user.authenticate(params[:password])
+            key = ApiKey.create(user_id: user.id)
+            { stat: 1, token: key.access_token, user_id: user.id, login: user.login }
+          else
+            { stat: 0, msg: '密码不正确' }
+          end
+        else
+          { stat: 0, msg: '用户不存在' }
         end
 
-        unless user
-          return error!('邮箱不存在!', 401)
-        end
-        if user.authenticate(params[:password])
-          key = ApiKey.create(user_id: user.id)
-          {token: key.access_token, user_id: user.id, login: user.login}
-        else
-          error!('密码错误!', 401)
-        end
       end
 
       desc "Returns pong if logged in correctly"
@@ -54,22 +58,21 @@ module API
         end
       end
 
-      desc 'check_email'
+      desc 'check_user email or phone'
       params do
-        requires :email, type: String, desc: 'email'
+        requires :mark, type: String, desc: 'user email or phone'
       end
-      get :check_email do
-        #验证邮箱格式
-        z = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-        unless z.match(params[:email])
-          error!('邮箱格式不正确!', 401)
-        end
-        user = User.find_by(email: params[:email].downcase)
-        if user
-          error!('邮箱已存在!', 401)
+      get :check_user do
+        if (User::VALID_EMAIL_REGEX =~ params[:mark]) == 0
+          return { stat: 0, msg: '邮箱已存在!' } if User.have_email?(params[:mark].downcase)
+          
+        elsif (User::VALID_PHONE_REGEX =~ params[:mark]) == 0
+          return { stat: 0, msg: '手机已存在!' } if User.have_phone?(params[:mark])
         else
-          {stat: 1, msg: '可以注册'}
+          return {stat: 0, msg: '邮箱或手机格式不正确!'}
         end
+        {stat: 1, msg: '可以注册'}
+
       end
     end  
   end

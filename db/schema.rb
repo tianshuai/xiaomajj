@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141022082739) do
+ActiveRecord::Schema.define(version: 20141031035524) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -67,6 +67,20 @@ ActiveRecord::Schema.define(version: 20141022082739) do
   end
 
   add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id", using: :btree
+
+  create_table "captchas", force: true do |t|
+    t.string   "title"
+    t.string   "code"
+    t.integer  "kind",       default: 1, null: false
+    t.integer  "expires_at"
+    t.integer  "user_id",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "captchas", ["code"], name: "index_captchas_on_code", using: :btree
+  add_index "captchas", ["expires_at"], name: "index_captchas_on_expires_at", using: :btree
+  add_index "captchas", ["user_id"], name: "index_captchas_on_user_id", using: :btree
 
   create_table "opinions", force: true do |t|
     t.string   "content"
@@ -141,13 +155,45 @@ ActiveRecord::Schema.define(version: 20141022082739) do
 
   create_table "users", force: true do |t|
     t.string   "login",                  null: false
-    t.string   "email",                  null: false
+    t.string   "email"
     t.integer  "kind",       default: 1, null: false
     t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "phone"
+    t.integer  "status",     default: 1, null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["login"], name: "index_users_on_login", using: :btree
+  add_index "users", ["phone"], name: "index_users_on_phone", using: :btree
+
+  create_table "write_records", force: true do |t|
+    t.text     "content"
+    t.integer  "kind",            default: 1, null: false
+    t.integer  "user_id",                     null: false
+    t.integer  "writing_bank_id",             null: false
+    t.integer  "status",          default: 1, null: false
+    t.integer  "is_amend",        default: 0, null: false
+    t.integer  "is_modify",       default: 1, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "write_records", ["user_id"], name: "index_write_records_on_user_id", using: :btree
+  add_index "write_records", ["writing_bank_id"], name: "index_write_records_on_writing_bank_id", using: :btree
+
+  create_table "writing_banks", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "kind",       default: 1, null: false
+    t.integer  "status",     default: 1, null: false
+    t.string   "number",                 null: false
+    t.string   "tags"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "writing_banks", ["number"], name: "index_writing_banks_on_number", unique: true, using: :btree
 
 end

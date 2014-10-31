@@ -32,6 +32,21 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  # Don't care if the mailer can't send
+  config.action_mailer.raise_delivery_errors = true
+  # ActionMailer::Base.deliveries array.
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+    :address => "smtp.163.com",
+    :port => 25,
+    :domain => CONF[:static_domain],
+    :authentication => "plain",
+    :user_name => "xiaoma_pwd",
+    :password => "xiaoma",
+    :enable_starttls_auto => true
+  }
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

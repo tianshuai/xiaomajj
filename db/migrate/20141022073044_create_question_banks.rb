@@ -10,6 +10,6 @@ class CreateQuestionBanks < ActiveRecord::Migration
       t.timestamps
     end
 
-	add_index :question_banks,	:number, unique: true
+	  add_index :question_banks,	:number, unique: true
   end
 end

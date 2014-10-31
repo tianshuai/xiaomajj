@@ -4,12 +4,15 @@ defaults: &defaults
 development:  
   <<: *defaults  
   domain: http://192.168.1.230:4000
+  static_domain: http://192.168.1.230
   
 test:  
   <<: *defaults  
   domain: http://192.168.1.230:4000
+  static_domain: http://192.168.1.230
   
 production:  
   <<: *defaults 
   domain: http://xiaomajijing.xiaoma.com 
+  static_domain: http://xmjj.xiaoma.com
 
