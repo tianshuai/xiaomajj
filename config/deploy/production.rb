@@ -3,7 +3,6 @@
 # Supports bulk-adding hosts to roles, the primary server in each group
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
-set :stage, :production
 
 role :app, %w{xiaomajijing@211.157.136.58}
 role :web, %w{xiaomajijing@211.157.136.58}
@@ -18,7 +17,6 @@ role :db,  %w{xiaomajijing@211.157.136.58}
 
 server '211.157.136.58', user: 'xiaomajijing', roles: %w{web app}, my_property: 22
 
-set :rails_env, :production
 
 # Custom SSH Options
 # ==================
