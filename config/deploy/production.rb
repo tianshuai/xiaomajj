@@ -18,7 +18,7 @@ set :stage, :production
 
 server '211.157.136.58', user: 'xiaomajijing', roles: %w{web app}, my_property: 22
 
-
+set :rails_env, "production"
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a
