@@ -71,7 +71,7 @@ set :puma_init_active_record, true  # Change to true if using ActiveRecord
 
 
 set :state, :production
-
+set :app_server, :puma
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
