@@ -5,7 +5,6 @@
 # property set.  Don't declare `role :all`, it's a meta role.
 
 set :stage, :production
-set :rails_env, :production
 
 role :app, %w{xiaomajijing@211.157.136.58}
 role :web, %w{xiaomajijing@211.157.136.58}
@@ -20,7 +19,7 @@ role :db,  %w{xiaomajijing@211.157.136.58}
 
 server '211.157.136.58', user: 'xiaomajijing', roles: %w{web app}, my_property: 22
 
-
+set :rails_env, :production
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a
