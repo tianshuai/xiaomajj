@@ -77,6 +77,10 @@ set :puma_prune_bundler, false
 
 namespace :deploy do
 
+  before :starting, :set_rails_env do
+    set :rails_env, (fetch(:rails_env) || fetch(:stage))
+  end
+
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
