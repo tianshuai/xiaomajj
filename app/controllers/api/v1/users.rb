@@ -119,11 +119,38 @@ module API
           
         end
 
+        desc 'find pwd email view'
+        params do
+          requires :code, type: String, desc: 'param mark'
+        end
+        get :find_pwd_view do
+          captcha = Captcha.find_by(code: params[:code])
+          return { stat: 0, msg: '验证无效!' } unless captcha.present?
+          return { stat: 0, msg: '验证码失效,请重新发送邮件!' } if captcha.is_expire?
+          user = User.find(captcha.user_id)
+          return { stat: 0, msg: '用户不存在!' } unless user.present?
+          { stat: 1, code: captcha.code, user_id: captcha.user_id, user_login: user.login }
+        end
+
         desc "find pwd for email"
         params do
-          
+          requires :code, type: String, desc: 'param code'
+          requires :password, type: String, desc: 'new password'
+          requires :password_confirm, type: String, desc: 'confirm password'
         end
-        get :find_pwd_for_email do
+        post :find_pwd_for_email do
+          captcha = Captcha.find_by(code: params[:code], kind: Captcha::KIND[:email])
+          return { stat: 0, msg: '验证无效!' } unless captcha.present?
+          return { stat: 0, msg: '验证码失效,请重新发送邮件!' } if captcha.is_expire?
+          user = User.find(captcha.user_id)
+          return { stat: 0, msg: '用户不存在!' } unless user.present?
+          return { stat: 0, msg: '两次密码不一致' } if params[:password] != params[:password_confirm]
+          if user.update(password: params[:password])
+            captcha.destroy
+            { stat: 1, msg: '更新成功!' }
+          else
+            { stat: 0, msg: '更新失败!' }
+          end
 
         end
 

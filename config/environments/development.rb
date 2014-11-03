@@ -40,7 +40,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :address => "smtp.163.com",
     :port => 25,
-    :domain => CONF[:static_domain],
+    :domain => '163.com',
     :authentication => "plain",
     :user_name => "xiaoma_pwd",
     :password => "xiaoma",

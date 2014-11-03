@@ -17,7 +17,7 @@ default: &default
 
 development:
   <<: *default
-  #host: 192.168.1.202
+  host: 127.0.0.1
   database: xiaomajj_dev
   username: root
   password: 
@@ -50,7 +50,12 @@ test:
 #
 production:
   <<: *default
-  host: 192.168.1.202
-  database: xiaomajijing
+  #host: 192.168.1.202
+  #database: xiaomajijing
+  #username: root
+  #password: ergal1234
+
+  host: 127.0.0.1
+  database: xiaomajj_dev
   username: root
-  password: ergal1234
+  password: 
