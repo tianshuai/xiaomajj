@@ -17,7 +17,7 @@ module API
         def create_captcha_email(user, options={})
           captcha = Captcha.new(options)
           if captcha.save
-            UserMailer.find_pwd(user, 'abc').deliver
+            UserMailer.find_pwd(user, captcha.code).deliver
             return { stat: 1, msg: 'success!' }
           else
             return { stat: 0, msg: '创建captcha失败' }
