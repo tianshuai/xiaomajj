@@ -3,7 +3,7 @@ class UserMailer < ActionMailer::Base
 
   def find_pwd(user, mark)
 	  @user = user
-	  @url = "#{File.join(CONF['static_domain'], 'user/reset_pwd')}?mark=#{mark}"
+	  @url = "#{File.join(CONF['static_domain'], 'youxiangyz.html')}?mark=#{mark}"
     mail(to: user.email, subject: "小马机经-找回密码")
   end
 
