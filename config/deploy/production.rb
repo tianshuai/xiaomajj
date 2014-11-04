@@ -8,7 +8,6 @@ role :app, %w{xiaomajijing@211.157.136.58}
 role :web, %w{xiaomajijing@211.157.136.58}
 role :db,  %w{xiaomajijing@211.157.136.58}
 
-set :stage, :production
 
 # Extended Server Syntax
 # ======================
