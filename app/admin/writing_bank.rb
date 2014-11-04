@@ -1,5 +1,5 @@
-ActiveAdmin.register QuestionList do
-  permit_params :id, :year, :month, :day, :kind, :number_ids, :alone_number_ids, :synthetical_number_ids, :status
+ActiveAdmin.register WritingBank do
+  permit_params :id, :title, :content, :tags, :number, :kind, :status
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

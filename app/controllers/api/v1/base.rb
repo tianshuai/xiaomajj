@@ -8,7 +8,9 @@ module API
       mount API::V1::Auth
       mount API::V1::Users
       mount API::V1::QuestionBanks
+      mount API::V1::WritingBanks
       mount API::V1::QuestionLists
+      mount API::V1::WriteRecords
       mount API::V1::ThirdApi
 
       add_swagger_documentation(

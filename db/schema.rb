@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141031035524) do
+ActiveRecord::Schema.define(version: 20141104081343) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -68,6 +68,17 @@ ActiveRecord::Schema.define(version: 20141031035524) do
 
   add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id", using: :btree
 
+  create_table "blocks", force: true do |t|
+    t.string   "title",                  null: false
+    t.text     "content"
+    t.string   "mark",                   null: false
+    t.integer  "status",     default: 1, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "blocks", ["mark"], name: "index_blocks_on_mark", unique: true, using: :btree
+
   create_table "captchas", force: true do |t|
     t.string   "title"
     t.string   "code"
@@ -120,15 +131,21 @@ ActiveRecord::Schema.define(version: 20141031035524) do
   create_table "question_lists", force: true do |t|
     t.integer  "year"
     t.integer  "month"
-    t.integer  "day",        default: 1
-    t.integer  "kind",       default: 1
+    t.integer  "day",                    default: 1
+    t.integer  "kind",                   default: 1
     t.string   "number_ids"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "alone_number_ids"
+    t.string   "synthetical_number_ids"
+    t.integer  "status",                 default: 1, null: false
   end
 
+  add_index "question_lists", ["alone_number_ids"], name: "index_question_lists_on_alone_number_ids", using: :btree
   add_index "question_lists", ["day"], name: "index_question_lists_on_day", using: :btree
   add_index "question_lists", ["month"], name: "index_question_lists_on_month", using: :btree
+  add_index "question_lists", ["number_ids"], name: "index_question_lists_on_number_ids", using: :btree
+  add_index "question_lists", ["synthetical_number_ids"], name: "index_question_lists_on_synthetical_number_ids", using: :btree
   add_index "question_lists", ["year"], name: "index_question_lists_on_year", using: :btree
 
   create_table "questions", force: true do |t|
