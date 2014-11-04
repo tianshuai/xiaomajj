@@ -46,6 +46,21 @@ module API
           end
         end
 
+        desc 'my answers'
+        params do
+          requires :writing_bank_id,  type: Integer,  desc: 'writing bank id'
+          requires :user_id,  type: Integer,  desc: 'user id'
+          optional :token,  type: String, desc: 'token'
+        end
+        get :my_answers do
+          if current_user && current_user.id==params[:user_id]
+            w = WriteRecord.where(writing_bank_id: params[:writing_bank_id], user_id: params[:user_id])
+            { stat: 1, msg: 'ok', write_records: w }
+          else
+            { stat: 0, msg: '請先登录' }
+          end
+        end
+
       end
     end
   end

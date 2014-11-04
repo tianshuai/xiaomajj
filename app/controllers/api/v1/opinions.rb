@@ -24,11 +24,11 @@ module API
           end
         end
 
-        desc "Get the newest three opinions."
+        desc "Get the opinions."
         params do
           requires :question_bank_id, type: Integer, desc: "ID of question Bank"
         end
-        get do
+        get :list do
           QuestionBank.find(params[:question_bank_id]).opinions.order('created_at DESC').limit(10)
         end
       end

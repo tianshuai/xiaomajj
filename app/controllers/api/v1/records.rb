@@ -30,7 +30,7 @@ module API
         params do
           requires :question_bank_id, type: Integer, desc: "ID of question"
         end
-        get  do
+        get :list do
           QuestionBank.find(params[:question_bank_id]).records.limit(3).order('created_at DESC')
         end
 
@@ -38,7 +38,7 @@ module API
         params do
           requires :id, type: Integer,  desc: "find one record"
         end
-        get "record/:id" do
+        get do
           Record.find(params[:id])
         end
       end

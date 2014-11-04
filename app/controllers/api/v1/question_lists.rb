@@ -38,7 +38,7 @@ module API
           l = l.first
           if params[:kind]==1
             return { stat: 0, msg: '数据不存在!' } if l.number_ids.blank?
-            q = QuestionBank.find_by(number: l.number_ids.split(',').first).answers
+            q = QuestionBank.find_by(number: l.number_ids.split(',').first)
           elsif params[:kind]==2
             return { stat: 0, msg: '数据不存在!' } if l.alone_number_ids.blank?
             q = WritingBank.find_by(number: l.alone_number_ids.split(',').first)

@@ -7,6 +7,7 @@ module API
       mount API::V1::Opinions
       mount API::V1::Auth
       mount API::V1::Users
+      mount API::V1::Answers
       mount API::V1::QuestionBanks
       mount API::V1::WritingBanks
       mount API::V1::QuestionLists
