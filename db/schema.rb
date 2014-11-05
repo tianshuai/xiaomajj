@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104081343) do
+ActiveRecord::Schema.define(version: 20141105062438) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -92,6 +92,16 @@ ActiveRecord::Schema.define(version: 20141104081343) do
   add_index "captchas", ["code"], name: "index_captchas_on_code", using: :btree
   add_index "captchas", ["expires_at"], name: "index_captchas_on_expires_at", using: :btree
   add_index "captchas", ["user_id"], name: "index_captchas_on_user_id", using: :btree
+
+  create_table "comments", force: true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "status",          default: 1, null: false
+    t.integer  "relateable_id"
+    t.string   "relateable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "opinions", force: true do |t|
     t.string   "content"
@@ -209,6 +219,7 @@ ActiveRecord::Schema.define(version: 20141104081343) do
     t.string   "tags"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "video_url"
   end
 
   add_index "writing_banks", ["number"], name: "index_writing_banks_on_number", unique: true, using: :btree

@@ -1,5 +1,6 @@
 class WritingBank < ActiveRecord::Base
 
+  has_many :comments, dependent: :destroy,  as: :relateable
 
 
   validates :title,                                length: { maximum: 50, message: '小于50个字符' }

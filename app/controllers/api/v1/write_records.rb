@@ -22,7 +22,6 @@ module API
           requires :content, type: String, desc: "content"
           requires :writing_bank_id, type: Integer, desc: "writing_bank ID"
           requires :user_id, type: Integer, desc: "user ID"
-          #optional :title, type: String, desc: 'title'
           optional :is_amend, type: Integer,  default: 0, desc: 'allow teacher amend?'
           optional :kind, type: Integer,  default: 1, desc: '综合 ？独立'
           optional :token,  type: String, desc: "token"
