@@ -41,10 +41,6 @@ module API
           end
         end
 
-        desc "index tiku"
-        get :tiku do
-
-        end
       end
     end
   end

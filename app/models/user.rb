@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  has_many :comments
+
   #验证邮箱格式
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   #验证手机号码

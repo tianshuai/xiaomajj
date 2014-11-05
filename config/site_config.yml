@@ -8,8 +8,8 @@ development:
   
 test:  
   <<: *defaults  
-  domain: http://xiaomajijing.xiaoma.com 
-  static_domain: http://xmjj.xiaoma.com
+  domain: http://192.168.1.230:4000
+  static_domain: http://192.168.1.230
   
 production:  
   <<: *defaults 
