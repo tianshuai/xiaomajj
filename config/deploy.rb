@@ -1,8 +1,8 @@
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 
-set :stage, 'production'
-set :rails_env, 'production'
+set :stage, :production
+set :rails_env, :production
 
 set :application, 'xiaomajj'
 set :repo_url, 'git@github.com:tianshuai/xiaomajj.git'
@@ -65,8 +65,7 @@ SSHKit.config.command_map[:rake] = "#{fetch(:default_env)[:rvm_bin_path]}/rvm ru
 namespace :deploy do
 
   before :starting, :set_rails_env do
-    #set :rails_env, (fetch(:rails_env) || fetch(:stage))
-    set :rails_env, :production
+    set :rails_env, (fetch(:rails_env) || fetch(:stage))
   end
 
   desc 'Restart application'

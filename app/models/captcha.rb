@@ -19,9 +19,9 @@ class Captcha < ActiveRecord::Base
     if self.kind==1
       n = 3600
     elsif self.kind==2
-      n = 300
+      n = 600
     else
-      n = 300
+      n = 600
     end
     return true if (self.expires_at + n) < Time.now.to_i
     return false

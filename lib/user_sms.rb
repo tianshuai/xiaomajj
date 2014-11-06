@@ -16,7 +16,7 @@ class UserSms
     auth = Base64.strict_encode64(account_sid + ":" + "#{timestamp}")
     sig = Digest::MD5.hexdigest(account_sid + auth_token + "#{timestamp}")
     
-    request_body_map = {to: "#{options[:phone]}", appId: app_id, templateId: message_tmp, datas: ["#{options[:captcha]}", "1"]}
+    request_body_map = {to: "#{options[:phone]}", appId: app_id, templateId: message_tmp, datas: ["#{options[:captcha]}", "10"]}
     
     begin
       response = RestClient.post("#{host}/2013-12-26/Accounts/#{account_sid}/SMS/TemplateSMS?sig=#{sig}",

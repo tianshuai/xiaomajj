@@ -70,8 +70,6 @@ module API
 
           captcha = Captcha.find_by( user_id: user.id, kind: Captcha::KIND[:email] )
           mark = Digest::MD5.hexdigest("#{user.email}:#{Time.now.to_i.to_s}")
-          puts 'aaaaa'
-          puts mark
           hash = {
             user_id: user.id,
             kind: Captcha::KIND[:email],
