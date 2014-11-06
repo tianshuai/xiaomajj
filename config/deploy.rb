@@ -2,6 +2,8 @@
 lock '3.2.1'
 
 set :stage, :production
+set :rails_env, :production
+
 set :application, 'xiaomajj'
 set :repo_url, 'git@github.com:tianshuai/xiaomajj.git'
 
