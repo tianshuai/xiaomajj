@@ -53,7 +53,7 @@ module API
         end
         get :my_answers do
           if current_user && current_user.id==params[:user_id]
-            w = WriteRecord.where(writing_bank_id: params[:writing_bank_id], user_id: params[:user_id])
+            w = WriteRecord.where(writing_bank_id: params[:writing_bank_id], user_id: params[:user_id]).order('created_at DESC').limit(20)
             { stat: 1, msg: 'ok', write_records: w }
           else
             { stat: 0, msg: '請先登录' }
