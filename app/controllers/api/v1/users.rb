@@ -51,6 +51,7 @@ module API
           else
             return {stat: 0, msg: '邮箱或手机格式不正确!'}
           end
+          return { stat: 0, msg: '用户名已存在!' } if User.have_login?(hash[:login])
           user = User.new(hash)
           if user.save
             { stat: 1, msg: 'success!' }

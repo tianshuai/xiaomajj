@@ -21,6 +21,7 @@ module API
             return { stat: 0, msg: '传入类型错误!' }
           end
           if current_user && current_user.id==params[:user_id]
+            return { stat: 0, msg: '您对此题的回复过于频繁' } if Comment.where(user_id: current_user.id, relateable_id: params[:relateable_id], relateable_type: relateable_type).size > 5
             comment = Comment.new({
               content: params[:content],
               relateable_id: params[:relateable_id],

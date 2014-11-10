@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   ##验证
   validates_presence_of :login,                    message: '不能为空'
-  #validates_uniqueness_of :login,				　message: '用户名已存在'
+  validates_uniqueness_of :login,				　         message: '用户名已存在'
   validates :login,                                length: { minimum: 2, maximum: 30, message: '长度大于2个字符且小于30个字符' }
 
   #validates_presence_of :email,                   message: '不能为空'
@@ -38,6 +38,12 @@ class User < ActiveRecord::Base
   #判断手机号是否存在
   def self.have_phone?(phone)
     return true if self.find_by(phone: phone)
+    return false
+  end
+
+  #判断昵称是否存在
+  def self.have_login?(login)
+    return true if self.find_by(login: login.strip)
     return false
   end
 
