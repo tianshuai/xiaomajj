@@ -1,10 +1,16 @@
 defaults: &defaults  
   site_name: xiaomajj
+  wb_api:
+    api_key: 3903418296
+    api_sercet: 29c7980144b79cb379c088343f8b2d91
+  qq_api:
+    api_key: 101168184
+    api_sercet: f0241bd8edc4000a8b716852910e854c
   
 development:  
   <<: *defaults  
-  domain: http://xiaomajijing.xiaoma.com 
-  static_domain: http://xmjj.xiaoma.com
+  domain: http://192.168.1.230:4000
+  static_domain: http://192.168.1.230
   
 test:  
   <<: *defaults  

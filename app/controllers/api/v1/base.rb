@@ -13,7 +13,7 @@ module API
       mount API::V1::WritingBanks
       mount API::V1::QuestionLists
       mount API::V1::WriteRecords
-      mount API::V1::ThirdApi
+      mount API::V1::ThirdApies
 
       add_swagger_documentation(
         api_version: "v1",

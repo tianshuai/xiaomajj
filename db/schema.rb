@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141105062438) do
+ActiveRecord::Schema.define(version: 20141110105054) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -179,6 +179,18 @@ ActiveRecord::Schema.define(version: 20141105062438) do
 
   add_index "records", ["question_bank_id"], name: "index_records_on_question_bank_id", using: :btree
   add_index "records", ["user_id"], name: "index_records_on_user_id", using: :btree
+
+  create_table "third_apis", force: true do |t|
+    t.string   "uid"
+    t.integer  "user_id"
+    t.string   "access_token"
+    t.integer  "expires_in"
+    t.integer  "kind",          default: 1, null: false
+    t.string   "refresh_token"
+    t.integer  "status",        default: 1, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "login",                  null: false
