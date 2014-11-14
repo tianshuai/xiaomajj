@@ -65,16 +65,17 @@ module API
             }
 
             begin
-              result = RestClient.post url, param
-              #result = JSON.parse(result)
-              result.split('&').each do |d|
-                d.split('=').each do |f|
-                  f[0]
-                end
+              qq = Qq.new
+              hash = qq.get_token(params[:code],request.env['HTTP_CONNECTION'])
+              puts 'aaaa'
+              puts hash
+              third_api = ThirdApi.where(uid: hash[:openid], kind: ThirdApi::KIND[:qq])
+              if third_api.present? && third_api.first.user.present?
+
+              else
+
               end
-              puts 'bbbbb'
-              puts result
-          
+
             rescue=>e
               puts 'cccc'
               puts e.message
